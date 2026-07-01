@@ -1,0 +1,41 @@
+{
+  "en": {
+    "title": "My Profile",
+    "subtitle": "Manage your personal information",
+    "loadingProfile": "Loading profile...",
+    "personalInformation": "Personal information",
+    "personalInformationSubtitle": "Name, contact, date of birth, blood type",
+    "logoutConfirm": "Are you sure you want to logout?",
+    "pleaseLogInAgain": "Please log in again",
+    "failedToLoadProfile": "Failed to load profile",
+    "failedToFetchProfile": "Failed to fetch profile",
+    "failedToRefreshProfile": "Failed to refresh profile",
+    "failedToLogout": "Failed to logout. Please try again."
+  },
+  "ar": {
+    "title": "ملفي الشخصي",
+    "subtitle": "إدارة معلوماتك الشخصية",
+    "loadingProfile": "جارٍ تحميل الملف الشخصي...",
+    "personalInformation": "المعلومات الشخصية",
+    "personalInformationSubtitle": "الاسم، جهة الاتصال، تاريخ الميلاد، فصيلة الدم",
+    "logoutConfirm": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+    "pleaseLogInAgain": "يرجى تسجيل الدخول مرة أخرى",
+    "failedToLoadProfile": "فشل تحميل الملف الشخصي",
+    "failedToFetchProfile": "فشل جلب الملف الشخصي",
+    "failedToRefreshProfile": "فشل تحديث الملف الشخصي",
+    "failedToLogout": "فشل تسجيل الخروج. يرجى المحاولة مرة أخرى."
+  },
+  "fr": {
+    "title": "Mon profil",
+    "subtitle": "Gérez vos informations personnelles",
+    "loadingProfile": "Chargement du profil...",
+    "personalInformation": "Informations personnelles",
+    "personalInformationSubtitle": "Nom, contact, date de naissance, groupe sanguin",
+    "logoutConfirm": "Êtes-vous sûr de vouloir vous déconnecter ?",
+    "pleaseLogInAgain": "Veuillez vous reconnecter",
+    "failedToLoadProfile": "Échec du chargement du profil",
+    "failedToFetchProfile": "Échec de la récupération du profil",
+    "failedToRefreshProfile": "Échec de l'actualisation du profil",
+    "failedToLogout": "Échec de la déconnexion. Veuillez réessayer."
+  }
+}

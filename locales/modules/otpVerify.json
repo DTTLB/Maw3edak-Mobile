@@ -1,0 +1,44 @@
+{
+  "en": {
+    "title": "Verify OTP",
+    "subtitle": "We've sent a 6-digit code to",
+    "verifyButton": "Verify OTP",
+    "verifyPhoneTitle": "Verify Your Phone",
+    "verificationCodeSubtitle": "We sent a verification code to",
+    "verifying": "Verifying...",
+    "verifyCodeButton": "Verify Code",
+    "didNotReceive": "Didn't receive the code?",
+    "resend": "Resend",
+    "errorIncompleteCode": "Please enter the complete 6-digit code",
+    "errorInvalidOtp": "Invalid OTP. Please try again.",
+    "errorGeneric": "An error occurred. Please try again."
+  },
+  "ar": {
+    "title": "التحقق من رمز التحقق",
+    "subtitle": "لقد أرسلنا رمزاً مكوناً من 6 أرقام إلى",
+    "verifyButton": "التحقق من الرمز",
+    "verifyPhoneTitle": "التحقق من هاتفك",
+    "verificationCodeSubtitle": "لقد أرسلنا رمز التحقق إلى",
+    "verifying": "جارٍ التحقق...",
+    "verifyCodeButton": "التحقق من الرمز",
+    "didNotReceive": "لم تستلم الرمز؟",
+    "resend": "إعادة الإرسال",
+    "errorIncompleteCode": "يرجى إدخال الرمز المكون من 6 أرقام كاملاً",
+    "errorInvalidOtp": "رمز التحقق غير صحيح. يرجى المحاولة مرة أخرى.",
+    "errorGeneric": "حدث خطأ. يرجى المحاولة مرة أخرى."
+  },
+  "fr": {
+    "title": "Vérifier le code OTP",
+    "subtitle": "Nous avons envoyé un code à 6 chiffres au",
+    "verifyButton": "Vérifier le code OTP",
+    "verifyPhoneTitle": "Vérifiez votre téléphone",
+    "verificationCodeSubtitle": "Nous avons envoyé un code de vérification au",
+    "verifying": "Vérification en cours...",
+    "verifyCodeButton": "Vérifier le code",
+    "didNotReceive": "Vous n'avez pas reçu le code ?",
+    "resend": "Renvoyer",
+    "errorIncompleteCode": "Veuillez saisir le code complet à 6 chiffres",
+    "errorInvalidOtp": "Code OTP invalide. Veuillez réessayer.",
+    "errorGeneric": "Une erreur s'est produite. Veuillez réessayer."
+  }
+}

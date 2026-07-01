@@ -1,0 +1,57 @@
+# dependencies
+node_modules/
+
+# expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# --- Native projects (BARE / NATIVE APP) ---
+# DO NOT ignore android/ or ios/ in a native app, otherwise EAS won't get gradlew
+# android/
+# ios/
+
+# --- Native secrets / signing keys (keep ignored) ---
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Android (common)
+android/.gradle/
+android/**/build/
+android/**/.cxx/
+android/local.properties
+android/.idea/
+android/*.iml
+
+# iOS (common)
+ios/Pods/
+ios/build/
+ios/DerivedData/
+ios/*.xcworkspace
+ios/*.xcuserstate
+ios/**/xcuserdata/
+
+# metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+
+# local env files
+.env*.local
+.env
+
+# typescript
+*.tsbuildinfo
+api/serviceaccountkey.json
+api/serviceaccountkey.json

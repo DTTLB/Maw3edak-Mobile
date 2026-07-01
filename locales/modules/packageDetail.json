@@ -1,0 +1,38 @@
+{
+  "en": {
+    "title": "Package Details",
+    "failedToLoad": "Failed to load package details",
+    "purchased": "Purchased: {{date}}",
+    "totalPaid": "Total Paid:",
+    "servicesUsageHistory": "Services & Usage History",
+    "sessionSummary": "{{used}}/{{total}} sessions used • {{remaining}} remaining",
+    "usageHistory": "Usage History:",
+    "sessionsUsedCount_one": "{{count}} session used",
+    "sessionsUsedCount_other": "{{count}} sessions used",
+    "noUsageHistory": "No usage history yet"
+  },
+  "ar": {
+    "title": "تفاصيل الباقة",
+    "failedToLoad": "فشل تحميل تفاصيل الباقة",
+    "purchased": "تاريخ الشراء: {{date}}",
+    "totalPaid": "الإجمالي المدفوع:",
+    "servicesUsageHistory": "الخدمات وسجل الاستخدام",
+    "sessionSummary": "{{used}}/{{total}} جلسات مستخدمة • {{remaining}} متبقية",
+    "usageHistory": "سجل الاستخدام:",
+    "sessionsUsedCount_one": "تم استخدام {{count}} جلسة",
+    "sessionsUsedCount_other": "تم استخدام {{count}} جلسات",
+    "noUsageHistory": "لا يوجد سجل استخدام بعد"
+  },
+  "fr": {
+    "title": "Détails du forfait",
+    "failedToLoad": "Échec du chargement des détails du forfait",
+    "purchased": "Acheté le : {{date}}",
+    "totalPaid": "Total payé :",
+    "servicesUsageHistory": "Services et historique d'utilisation",
+    "sessionSummary": "{{used}}/{{total}} séances utilisées • {{remaining}} restantes",
+    "usageHistory": "Historique d'utilisation :",
+    "sessionsUsedCount_one": "{{count}} séance utilisée",
+    "sessionsUsedCount_other": "{{count}} séances utilisées",
+    "noUsageHistory": "Aucun historique d'utilisation pour le moment"
+  }
+}

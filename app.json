@@ -1,0 +1,119 @@
+{
+  "expo": {
+    "name": "Maw3edak",
+    "slug": "maw3edak",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "runtimeVersion": "1.0.0",
+    "icon": "./assets/images/Logo.png",
+    "scheme": "maw3edak",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/Logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFFFFF"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.maw3edak.app",
+      "icon": "./assets/images/Logo.png",
+      "googleServicesFile": "./googleservice-info.plist",
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "remote-notification"
+        ],
+        "NSCameraUsageDescription": "We use the camera only when you choose to take a profile photo or upload appointment, verification, or medical-related documents.",
+        "NSPhotoLibraryUsageDescription": "We access your photo library only when you choose an existing photo or document to upload as a profile photo, appointment document, verification document, or medical-related file.",
+        "NSPhotoLibraryAddUsageDescription": "We save images to your photo library only when you choose to save them.",
+        "NSFaceIDUsageDescription": "Use Face ID to securely unlock your account on this device."
+      }
+    },
+    "android": {
+      "package": "com.maw3edak.app",
+      "googleServicesFile": "./google-services.json",
+      "icon": "./assets/images/Logo.png",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/Logo.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "notification": {
+        "icon": "./assets/images/Logo.png"
+      },
+      "splash": {
+        "image": "./assets/images/Logo.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#FFFFFF",
+        "mdpi": "./assets/images/Logo.png",
+        "hdpi": "./assets/images/Logo.png",
+        "xhdpi": "./assets/images/Logo.png",
+        "xxhdpi": "./assets/images/Logo.png",
+        "xxxhdpi": "./assets/images/Logo.png"
+      },
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-web-browser",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/Logo.png",
+          "color": "#ffffff"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "We access your photo library only when you choose an existing photo or document to upload as a profile photo, appointment document, verification document, or medical-related file.",
+          "cameraPermission": "We use the camera only when you choose to take a profile photo or upload appointment, verification, or medical-related documents."
+        }
+      ],
+      [
+        "@react-native-firebase/app",
+        {
+          "android": true,
+          "ios": true,
+          "web": false
+        }
+      ],
+      [
+        "@react-native-firebase/messaging",
+        {
+          "android": true,
+          "ios": true,
+          "web": false
+        }
+      ],
+      "expo-localization",
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Use Face ID to securely unlock your account on this device."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "supabaseUrl": "https://ttyukcvqifqyfolxtwba.supabase.co",
+      "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0eXVrY3ZxaWZxeWZvbHh0d2JhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk4MzU0ODQsImV4cCI6MjA3NTQxMTQ4NH0.4gk9iYDlqdPMKgf9yEKx6ktMVibRFcAM2mS6Li8xqfc",
+      "eas": {
+        "projectId": "5b128efe-3afe-45a0-96fe-1697d57d989f"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/5b128efe-3afe-45a0-96fe-1697d57d989f"
+    }
+  }
+}

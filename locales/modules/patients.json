@@ -1,0 +1,38 @@
+{
+  "en": {
+    "title": "Patients",
+    "searchPlaceholder": "Search by name, medical ID, email...",
+    "noPatientsTitle": "No Patients",
+    "noPatientsSearch": "No patients found matching your search",
+    "noPatientsText": "Your patients list will appear here",
+    "noMedicalId": "No Medical ID",
+    "visits": "Visits",
+    "appointmentCountOne": "{{count}} appointment",
+    "appointmentCountOther": "{{count}} appointments",
+    "lastVisit": " • Last: {{date}}"
+  },
+  "ar": {
+    "title": "المرضى",
+    "searchPlaceholder": "ابحث بالاسم أو المعرّف الطبي أو البريد الإلكتروني...",
+    "noPatientsTitle": "لا يوجد مرضى",
+    "noPatientsSearch": "لا يوجد مرضى يطابقون بحثك",
+    "noPatientsText": "ستظهر قائمة مرضاك هنا",
+    "noMedicalId": "لا يوجد معرّف طبي",
+    "visits": "الزيارات",
+    "appointmentCountOne": "موعد واحد",
+    "appointmentCountOther": "{{count}} موعد",
+    "lastVisit": " • آخر زيارة: {{date}}"
+  },
+  "fr": {
+    "title": "Patients",
+    "searchPlaceholder": "Rechercher par nom, ID médical, e-mail...",
+    "noPatientsTitle": "Aucun patient",
+    "noPatientsSearch": "Aucun patient ne correspond à votre recherche",
+    "noPatientsText": "Votre liste de patients apparaîtra ici",
+    "noMedicalId": "Aucun ID médical",
+    "visits": "Visites",
+    "appointmentCountOne": "{{count}} rendez-vous",
+    "appointmentCountOther": "{{count}} rendez-vous",
+    "lastVisit": " • Dernier : {{date}}"
+  }
+}

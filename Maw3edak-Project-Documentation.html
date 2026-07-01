@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maw3edak Mobile — Full Project Documentation</title>
+<style>
+  :root{
+    --primary:#006BFF; --primary-dark:#1E40AF; --primary-light:#EFF6FF;
+    --success:#10B981; --warning:#F59E0B; --error:#EF4444; --purple:#8B5CF6;
+    --ink:#1E293B; --muted:#64748B; --faint:#94A3B8;
+    --bg:#FFFFFF; --bg2:#F8FAFC; --bg3:#F1F5F9; --border:#E2E8F0;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink); background:var(--bg2); line-height:1.6; font-size:15px;
+  }
+  .wrap{max-width:920px; margin:0 auto; background:var(--bg); padding:0 56px 80px;
+    box-shadow:0 0 40px rgba(0,0,0,.06);}
+
+  /* Cover */
+  .cover{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+    color:#fff; margin:0 -56px 40px; padding:90px 56px 70px; text-align:center;}
+  .cover .logo{width:84px;height:84px;border-radius:22px;background:rgba(255,255,255,.16);
+    display:inline-flex;align-items:center;justify-content:center;font-size:42px;margin-bottom:24px;
+    border:1px solid rgba(255,255,255,.3);}
+  .cover h1{font-size:46px;margin:0 0 6px;letter-spacing:-1px;font-weight:800;}
+  .cover .sub{font-size:19px;opacity:.92;font-weight:300;margin-bottom:28px;}
+  .cover .meta{display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+  .cover .pill{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);
+    padding:6px 14px;border-radius:999px;font-size:13px;}
+
+  h2{font-size:27px;margin:54px 0 4px;color:var(--ink);font-weight:800;letter-spacing:-.5px;
+    padding-top:14px;border-top:3px solid var(--primary);}
+  h2 .num{color:var(--primary);font-weight:800;}
+  h3{font-size:19px;margin:30px 0 8px;color:var(--primary-dark);font-weight:700;}
+  h4{font-size:15px;margin:18px 0 6px;color:var(--ink);font-weight:700;text-transform:uppercase;
+    letter-spacing:.5px;font-size:13px;color:var(--muted);}
+  p{margin:8px 0;}
+  a{color:var(--primary);text-decoration:none;}
+  ul{margin:8px 0;padding-left:22px;} li{margin:3px 0;}
+  code{background:var(--bg3);padding:2px 6px;border-radius:5px;font-family:'Consolas',monospace;
+    font-size:13px;color:var(--primary-dark);}
+  pre{background:#0f172a;color:#e2e8f0;padding:16px 18px;border-radius:10px;overflow:auto;
+    font-family:'Consolas',monospace;font-size:12.5px;line-height:1.5;margin:12px 0;}
+  pre .k{color:#7dd3fc}.pre .s{color:#a5b4fc}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;}
+  th{background:var(--primary);color:#fff;text-align:left;padding:9px 12px;font-weight:600;}
+  td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:nth-child(even) td{background:var(--bg2);}
+  .lead{font-size:16px;color:var(--muted);}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;}
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .card h4{margin-top:0;color:var(--primary-dark);font-size:14px;text-transform:none;letter-spacing:0;}
+  .badge{display:inline-block;background:var(--primary-light);color:var(--primary-dark);
+    border-radius:6px;padding:2px 9px;font-size:12px;font-weight:600;margin:2px 3px 2px 0;}
+  .tag{display:inline-block;background:var(--bg3);color:var(--muted);border-radius:6px;
+    padding:2px 8px;font-size:11.5px;margin:2px 2px;font-family:monospace;}
+  .note{background:var(--primary-light);border-left:4px solid var(--primary);padding:12px 16px;
+    border-radius:0 8px 8px 0;margin:14px 0;font-size:14px;}
+  .warn{background:#FEF3C7;border-left:4px solid var(--warning);padding:12px 16px;
+    border-radius:0 8px 8px 0;margin:14px 0;font-size:14px;}
+
+  /* swatches */
+  .swatches{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;}
+  .sw{width:120px;border:1px solid var(--border);border-radius:10px;overflow:hidden;font-size:12px;}
+  .sw .clr{height:54px;} .sw .lbl{padding:6px 8px;background:#fff;}
+  .sw .lbl b{display:block;} .sw .lbl span{color:var(--muted);font-family:monospace;}
+
+  /* TOC */
+  .toc{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:22px 26px;margin:10px 0 0;}
+  .toc h2{margin:0 0 12px;border:0;padding:0;font-size:20px;}
+  .toc ol{columns:2;column-gap:40px;margin:0;padding-left:20px;font-size:14px;}
+  .toc li{margin:5px 0;}
+  .toc a{color:var(--ink);}
+
+  /* print */
+  .toolbar{position:fixed;top:16px;right:16px;z-index:99;}
+  .toolbar button{background:var(--primary);color:#fff;border:0;padding:11px 18px;border-radius:10px;
+    font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(0,107,255,.35);}
+  .toolbar button:hover{background:var(--primary-dark);}
+  .footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--border);color:var(--faint);
+    font-size:12.5px;text-align:center;}
+  .stat{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0;}
+  .stat .b{flex:1;min-width:120px;background:var(--bg2);border:1px solid var(--border);
+    border-radius:12px;padding:16px;text-align:center;}
+  .stat .b .n{font-size:30px;font-weight:800;color:var(--primary);}
+  .stat .b .t{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+
+  @media print{
+    body{background:#fff;font-size:11.5px;}
+    .wrap{box-shadow:none;max-width:100%;padding:0 8mm;}
+    .toolbar{display:none;}
+    .cover{margin:0 0 20px;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    h2{page-break-after:avoid;} h3{page-break-after:avoid;}
+    table,pre,.card{page-break-inside:avoid;}
+    th,.cover,.badge,.sw .clr,.stat .b .n{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .toc ol{columns:2;}
+  }
+</style>
+</head>
+<body>
+<div class="toolbar"><button onclick="window.print()">🖨️ Save as PDF</button></div>
+<div class="wrap">
+
+  <!-- ===== COVER ===== -->
+  <div class="cover">
+    <div class="logo">🩺</div>
+    <h1>Maw3edak</h1>
+    <div class="sub">Healthcare Appointment &amp; Clinic Management — Mobile App</div>
+    <div class="sub" style="font-size:15px;margin-top:-18px;">Full Technical Documentation</div>
+    <div class="meta">
+      <span class="pill">Version 1.0.0</span>
+      <span class="pill">React Native · Expo</span>
+      <span class="pill">Supabase + Firebase</span>
+      <span class="pill">June 2026</span>
+    </div>
+  </div>
+
+  <p class="lead">This document describes the complete Maw3edak mobile application — its
+  architecture, screens, design system, frontend code, backend serverless functions, and
+  database. Use the <b>Save as PDF</b> button (top-right) or your browser's
+  <b>Print → Save as PDF</b> to export this as a PDF / document.</p>
+
+  <div class="stat">
+    <div class="b"><div class="n">50+</div><div class="t">App Screens</div></div>
+    <div class="b"><div class="n">110+</div><div class="t">Edge Functions</div></div>
+    <div class="b"><div class="n">12</div><div class="t">Custom Tables</div></div>
+    <div class="b"><div class="n">130+</div><div class="t">DB Migrations</div></div>
+    <div class="b"><div class="n">2</div><div class="t">User Roles</div></div>
+  </div>
+
+  <!-- ===== TOC ===== -->
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview">Project Overview</a></li>
+      <li><a href="#stack">Technology Stack</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#design">Design System</a></li>
+      <li><a href="#navigation">Navigation &amp; App Structure</a></li>
+      <li><a href="#screens">Screens Catalog</a></li>
+      <li><a href="#components">Reusable Components</a></li>
+      <li><a href="#state">State, Hooks &amp; Utilities</a></li>
+      <li><a href="#backend">Backend — Edge Functions</a></li>
+      <li><a href="#database">Database Schema</a></li>
+      <li><a href="#dbfunctions">DB Functions &amp; Triggers</a></li>
+      <li><a href="#notifications">Push Notifications</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#build">Build &amp; Deployment</a></li>
+      <li><a href="#code">Key Code Samples</a></li>
+    </ol>
+  </div>
+
+  <!-- ===== 1 OVERVIEW ===== -->
+  <h2 id="overview"><span class="num">1.</span> Project Overview</h2>
+  <p><b>Maw3edak</b> (Arabic for “your appointment”) is a cross-platform healthcare application
+  that connects <b>patients</b> with <b>doctors / clinics</b>. It supports the full clinical
+  journey: discovering doctors, booking appointments, accessing medical records (prescriptions,
+  dental, vision, nutrition), managing invoices and payments, answering medical questionnaires,
+  and receiving real-time push notifications.</p>
+
+  <p>The app ships <b>two complete experiences</b> from a single codebase, selected at login:</p>
+  <div class="grid">
+    <div class="card"><h4>👤 Patient App</h4>
+      Book &amp; manage appointments, browse doctors, view prescriptions / invoices / packages /
+      statements, dental &amp; vision &amp; nutrition records, doctor Q&amp;A responses, profile &amp;
+      payment methods, notifications.</div>
+    <div class="card"><h4>🩺 Doctor / Clinic App</h4>
+      Dashboard with daily stats, today's &amp; all appointments, patient list, prescriptions,
+      orders, finance summary, time-management (schedules), questionnaires &amp; patient answers,
+      authorization workflow, settings.</div>
+  </div>
+
+  <h4>Core Features</h4>
+  <span class="badge">Patient &amp; Doctor authentication</span>
+  <span class="badge">OTP phone/email verification</span>
+  <span class="badge">Biometric login gate</span>
+  <span class="badge">Multi-device login</span>
+  <span class="badge">Multi-clinic switching</span>
+  <span class="badge">Appointment booking engine</span>
+  <span class="badge">FCM push notifications</span>
+  <span class="badge">Medical records access</span>
+  <span class="badge">Prescriptions &amp; orders</span>
+  <span class="badge">Invoices &amp; statements</span>
+  <span class="badge">Questionnaires</span>
+  <span class="badge">Dark mode</span>
+  <span class="badge">Card scanner (camera)</span>
+
+  <!-- ===== 2 STACK ===== -->
+  <h2 id="stack"><span class="num">2.</span> Technology Stack</h2>
+  <table>
+    <tr><th>Layer</th><th>Technology</th><th>Purpose</th></tr>
+    <tr><td>Language</td><td>TypeScript / React 19</td><td>Type-safe app code</td></tr>
+    <tr><td>Framework</td><td>React Native 0.81 + Expo SDK 54</td><td>Cross-platform iOS / Android / Web</td></tr>
+    <tr><td>Navigation</td><td>Expo Router 6 (file-based, typed routes)</td><td>Stack + bottom tabs routing</td></tr>
+    <tr><td>Backend</td><td>Supabase (PostgreSQL + Edge Functions/Deno)</td><td>Database, auth sessions, serverless API</td></tr>
+    <tr><td>Push</td><td>Firebase Cloud Messaging + expo-notifications</td><td>Real-time notifications</td></tr>
+    <tr><td>Auth storage</td><td>AsyncStorage + expo-secure-store</td><td>Session persistence &amp; secrets</td></tr>
+    <tr><td>Biometrics</td><td>expo-local-authentication</td><td>Face ID / fingerprint gate</td></tr>
+    <tr><td>UI / Icons</td><td>lucide-react-native, @expo/vector-icons, expo-linear-gradient, expo-blur</td><td>Visual layer</td></tr>
+    <tr><td>Fonts</td><td>Inter (Regular / Medium / SemiBold / Bold)</td><td>Typography</td></tr>
+    <tr><td>Camera / Images</td><td>expo-camera, expo-image-picker</td><td>Card scan, profile photos</td></tr>
+    <tr><td>Crypto</td><td>expo-crypto, @noble/hashes</td><td>Password hashing</td></tr>
+    <tr><td>Build / OTA</td><td>EAS Build, expo-updates</td><td>Native builds &amp; over-the-air updates</td></tr>
+  </table>
+
+  <!-- ===== 3 ARCHITECTURE ===== -->
+  <h2 id="architecture"><span class="num">3.</span> Architecture</h2>
+  <p>The system follows a classic three-tier model. The mobile client never talks to the database
+  directly — every privileged operation goes through a <b>Supabase Edge Function</b> that
+  validates a custom session token, then uses the service role to read/write Postgres.</p>
+
+<pre>
+┌──────────────────────────────────────────────────────────────┐
+│                       MOBILE CLIENT                            │
+│   Expo Router (file-based)  ·  React Native UI                 │
+│   ├─ (auth)        login / register / OTP / reset             │
+│   ├─ (tabs)        PATIENT experience                          │
+│   ├─ (doctor-tabs) DOCTOR experience                           │
+│   └─ Contexts: Auth · Theme    Utils: supabase · fcm · auth   │
+└───────────────┬───────────────────────────┬──────────────────┘
+                │ HTTPS (fetch +             │ FCM
+                │ X-Session-Token)           │ (background msgs)
+                ▼                            ▼
+┌──────────────────────────────┐   ┌───────────────────────────┐
+│   SUPABASE EDGE FUNCTIONS     │   │   FIREBASE CLOUD MESSAGING │
+│   110+ Deno functions         │   │   device token delivery    │
+│   (mobile-* / send-* / auth)  │◄──┤   triggered from Postgres  │
+└───────────────┬──────────────┘   └───────────────────────────┘
+                │ service role
+                ▼
+┌──────────────────────────────────────────────────────────────┐
+│   POSTGRESQL (Supabase)                                        │
+│   App tables + clinic tables + RLS + RPC functions + triggers  │
+│   pg_net → calls send-push-notification on new notification    │
+└──────────────────────────────────────────────────────────────┘
+</pre>
+
+  <h4>Request flow (example: book appointment)</h4>
+  <ul>
+    <li>Patient taps <b>Book</b> → screen calls <code>mobile-book-appointment</code> with the
+      session token in the <code>X-Session-Token</code> header.</li>
+    <li>The edge function validates the token against <code>user_patient_sessions</code>, inserts
+      the appointment, and returns a result.</li>
+    <li>A Postgres <b>trigger</b> fires <code>notify_patient_new_appointment</code>, which inserts a
+      <code>patient_notifications</code> row.</li>
+    <li>An <b>AFTER INSERT</b> trigger (<code>send_fcm_on_patient_notification</code>) uses
+      <code>pg_net</code> to call <code>send-push-notification</code>, delivering the FCM message to the device.</li>
+  </ul>
+
+  <!-- ===== 4 DESIGN SYSTEM ===== -->
+  <h2 id="design"><span class="num">4.</span> Design System</h2>
+  <p>All visual tokens are centralized in <code>constants/theme.ts</code> and exposed at runtime
+  through <code>ThemeContext</code> (which also provides light/dark variants).</p>
+
+  <h3>Color Palette</h3>
+  <div class="swatches">
+    <div class="sw"><div class="clr" style="background:#006BFF"></div><div class="lbl"><b>Primary</b><span>#006BFF</span></div></div>
+    <div class="sw"><div class="clr" style="background:#1E40AF"></div><div class="lbl"><b>Primary Dark</b><span>#1E40AF</span></div></div>
+    <div class="sw"><div class="clr" style="background:#EFF6FF"></div><div class="lbl"><b>Primary Light</b><span>#EFF6FF</span></div></div>
+    <div class="sw"><div class="clr" style="background:#10B981"></div><div class="lbl"><b>Success</b><span>#10B981</span></div></div>
+    <div class="sw"><div class="clr" style="background:#F59E0B"></div><div class="lbl"><b>Warning</b><span>#F59E0B</span></div></div>
+    <div class="sw"><div class="clr" style="background:#EF4444"></div><div class="lbl"><b>Error</b><span>#EF4444</span></div></div>
+    <div class="sw"><div class="clr" style="background:#8B5CF6"></div><div class="lbl"><b>Purple</b><span>#8B5CF6</span></div></div>
+    <div class="sw"><div class="clr" style="background:#1E293B"></div><div class="lbl"><b>Text</b><span>#1E293B</span></div></div>
+    <div class="sw"><div class="clr" style="background:#64748B"></div><div class="lbl"><b>Text Sec.</b><span>#64748B</span></div></div>
+    <div class="sw"><div class="clr" style="background:#F8FAFC;border:1px solid #ddd"></div><div class="lbl"><b>BG Secondary</b><span>#F8FAFC</span></div></div>
+  </div>
+
+  <h4>Category colors (notification &amp; record types)</h4>
+  <p>
+    <span class="tag" style="background:#DBEAFE;color:#3B82F6">order</span>
+    <span class="tag" style="background:#D1FAE5;color:#10B981">appointment</span>
+    <span class="tag" style="background:#FEF3C7;color:#F59E0B">prescription</span>
+    <span class="tag" style="background:#EDE9FE;color:#8B5CF6">package</span>
+    <span class="tag" style="background:#FCE7F3;color:#EC4899">invoice</span>
+    <span class="tag" style="background:#FEE2E2;color:#EF4444">question</span>
+    <span class="tag" style="background:#F3F4F6;color:#6B7280">general</span>
+  </p>
+
+  <h3>Typography (Inter)</h3>
+  <table>
+    <tr><th>Token</th><th>Size</th><th>Weight</th><th>Line height</th></tr>
+    <tr><td>h1</td><td>28</td><td>Bold</td><td>36</td></tr>
+    <tr><td>h2</td><td>24</td><td>Bold</td><td>32</td></tr>
+    <tr><td>h3</td><td>20</td><td>Bold</td><td>28</td></tr>
+    <tr><td>h4</td><td>18</td><td>SemiBold</td><td>24</td></tr>
+    <tr><td>body</td><td>15</td><td>Regular / Medium / SemiBold</td><td>22</td></tr>
+    <tr><td>caption</td><td>13</td><td>Regular / Medium</td><td>18</td></tr>
+    <tr><td>small</td><td>11</td><td>Regular / Medium</td><td>16</td></tr>
+  </table>
+
+  <h3>Spacing &amp; Radius scale</h3>
+  <p><b>Spacing:</b>
+    <span class="tag">xs 4</span><span class="tag">sm 8</span><span class="tag">md 12</span>
+    <span class="tag">lg 16</span><span class="tag">xl 20</span><span class="tag">xxl 24</span>
+    <span class="tag">xxxl 32</span></p>
+  <p><b>Border radius:</b>
+    <span class="tag">sm 8</span><span class="tag">md 12</span><span class="tag">lg 16</span>
+    <span class="tag">xl 20</span><span class="tag">xxl 24</span><span class="tag">full 9999</span></p>
+  <p><b>Elevation/shadow:</b> three presets (<code>sm</code>, <code>md</code>, <code>lg</code>)
+  with platform-aware iOS shadow + Android elevation.</p>
+
+  <!-- ===== 5 NAVIGATION ===== -->
+  <h2 id="navigation"><span class="num">5.</span> Navigation &amp; App Structure</h2>
+  <p>Routing is file-based (Expo Router). The root <code>app/_layout.tsx</code> wraps the app in
+  <code>ErrorBoundary → SafeAreaProvider → AuthProvider → ThemeProvider → BiometricAuthGate</code>,
+  initializes Firebase &amp; notification listeners, loads Inter fonts, and manages the splash screen.</p>
+
+<pre>
+app/
+├── _layout.tsx              Root providers, Firebase, fonts, splash
+├── index.tsx                Entry / session routing
+├── login.tsx                Role selection entry
+├── (auth)/                  ── Authentication flow ──
+│   ├── patient-login.tsx        doctor-login.tsx
+│   ├── patient-register.tsx     registration-success.tsx
+│   ├── otp-verify.tsx           forgot-password.tsx
+│   ├── reset-password.tsx       reset-password-otp.tsx
+├── (tabs)/                  ── PATIENT experience (bottom tabs) ──
+│   ├── index (Home) · appointments · visit-history · settings
+│   └── [stacked] profile, doctors, prescriptions, orders, invoices,
+│       statement, packages, dental, vision, nutrition, doctor-responses
+├── (doctor-tabs)/           ── DOCTOR experience ──
+│   ├── index (Dashboard) · appointments · patients · settings
+│   └── [stacked] questions, questionnaires, patient-answers, finance,
+│       time-management, orders, medications, dental, vision, nutrition,
+│       notifications, patient-appointments
+└── [modals]  book-appointment · edit-profile · package-detail ·
+              payment-methods · notifications · help-center
+</pre>
+
+  <div class="note"><b>Visible tabs (patient):</b> Home, Appointments, Visits, (Settings/Profile
+  accessed via header). Other routes use <code>href:null</code> so they're navigable but hidden
+  from the tab bar. Android hardware back is intercepted to exit the app from root tabs and
+  navigate normally elsewhere.</div>
+
+  <!-- ===== 6 SCREENS ===== -->
+  <h2 id="screens"><span class="num">6.</span> Screens Catalog</h2>
+
+  <h3>Authentication <span class="tag">app/(auth)</span></h3>
+  <table>
+    <tr><th>Screen</th><th>Purpose</th></tr>
+    <tr><td>patient-login</td><td>Patient login (medical ID / phone + password)</td></tr>
+    <tr><td>doctor-login</td><td>Doctor / staff login</td></tr>
+    <tr><td>patient-register</td><td>New patient registration with image captcha</td></tr>
+    <tr><td>otp-verify</td><td>Verify phone/email OTP code</td></tr>
+    <tr><td>forgot-password / reset-password / reset-password-otp</td><td>Password recovery flow via OTP</td></tr>
+    <tr><td>registration-success</td><td>Confirmation screen after sign-up</td></tr>
+  </table>
+
+  <h3>Patient <span class="tag">app/(tabs)</span></h3>
+  <table>
+    <tr><th>Screen</th><th>Purpose</th></tr>
+    <tr><td>index (Home)</td><td>Dashboard: upcoming appointments, quick actions, shortcuts</td></tr>
+    <tr><td>appointments</td><td>List/manage appointments, status &amp; actions</td></tr>
+    <tr><td>visit-history</td><td>Past visits timeline</td></tr>
+    <tr><td>doctors</td><td>Browse / search accessible doctors</td></tr>
+    <tr><td>prescriptions</td><td>Patient prescriptions</td></tr>
+    <tr><td>orders</td><td>Medical/pharmacy orders</td></tr>
+    <tr><td>invoices / invoices detail</td><td>Billing documents</td></tr>
+    <tr><td>statement</td><td>Financial statement / ledger</td></tr>
+    <tr><td>packages</td><td>Treatment packages</td></tr>
+    <tr><td>dental / vision / nutrition</td><td>Specialty medical records</td></tr>
+    <tr><td>doctor-responses</td><td>Answers to patient questions</td></tr>
+    <tr><td>profile / settings</td><td>Account, preferences, dark mode, notifications, biometrics</td></tr>
+  </table>
+
+  <h3>Doctor / Clinic <span class="tag">app/(doctor-tabs)</span></h3>
+  <table>
+    <tr><th>Screen</th><th>Purpose</th></tr>
+    <tr><td>index (Dashboard)</td><td>Today's schedule + stats (pending, completed, cancelled, total patients)</td></tr>
+    <tr><td>appointments / patient-appointments</td><td>All &amp; per-patient appointments + actions</td></tr>
+    <tr><td>patients</td><td>Doctor's patient list with details</td></tr>
+    <tr><td>time-management</td><td>Recurring schedules, exceptions, blocks, slot duration</td></tr>
+    <tr><td>questions / questionnaires</td><td>Create &amp; manage Q&amp;A and questionnaires</td></tr>
+    <tr><td>patient-answers</td><td>Review submitted questionnaire answers</td></tr>
+    <tr><td>finance</td><td>Finance summary</td></tr>
+    <tr><td>orders / medications</td><td>Doctor orders &amp; prescriptions</td></tr>
+    <tr><td>dental / vision / nutrition</td><td>Manage specialty encounters &amp; plans</td></tr>
+    <tr><td>notifications</td><td>Doctor notifications &amp; authorization workflow</td></tr>
+    <tr><td>settings</td><td>Security settings, notifications toggle</td></tr>
+  </table>
+
+  <h3>Shared modals / utility</h3>
+  <p>
+    <span class="badge">book-appointment</span><span class="badge">edit-profile</span>
+    <span class="badge">package-detail</span><span class="badge">payment-methods</span>
+    <span class="badge">notifications</span><span class="badge">help-center</span>
+    <span class="badge">+not-found</span>
+  </p>
+
+  <!-- ===== 7 COMPONENTS ===== -->
+  <h2 id="components"><span class="num">7.</span> Reusable Components</h2>
+  <table>
+    <tr><th>Component</th><th>Responsibility</th></tr>
+    <tr><td>BiometricAuthGate</td><td>Wraps the app; enforces Face ID / fingerprint unlock when enabled. Exposes <code>resetBiometricSession()</code>.</td></tr>
+    <tr><td>ErrorBoundary</td><td>Catches render errors and shows a safe fallback UI.</td></tr>
+    <tr><td>CardScannerModal</td><td>Camera-based payment card scanner (expo-camera).</td></tr>
+    <tr><td>ImageCaptcha</td><td>Image-based CAPTCHA for registration anti-bot.</td></tr>
+    <tr><td>FilterBottomSheet</td><td>Reusable bottom-sheet filter UI.</td></tr>
+    <tr><td>NotificationCard</td><td>List row for a single notification (category color, read state).</td></tr>
+    <tr><td>NotificationDetail</td><td>Expanded notification view + deep-link navigation.</td></tr>
+  </table>
+
+  <!-- ===== 8 STATE ===== -->
+  <h2 id="state"><span class="num">8.</span> State, Hooks &amp; Utilities</h2>
+
+  <h3>Contexts</h3>
+  <div class="grid">
+    <div class="card"><h4>AuthContext</h4>
+      Holds <code>session</code> (custom) &amp; <code>supabaseSession</code>; exposes
+      <code>signOut</code>, <code>refreshSession</code>, <code>switchClinic</code>. Bootstraps
+      from AsyncStorage with timeout guards, listens to Supabase auth changes, deactivates the
+      device token on sign-out.</div>
+    <div class="card"><h4>ThemeContext</h4>
+      Provides resolved <code>colors</code> for light/dark mode, persists the user's dark-mode
+      preference, and syncs it to the server (<code>mobile-update-darkmode</code>).</div>
+  </div>
+
+  <h3>Hooks</h3>
+  <p><code>useFrameworkReady()</code> — framework readiness signal used during boot.</p>
+
+  <h3>Utilities <span class="tag">utils/</span></h3>
+  <table>
+    <tr><th>File</th><th>Responsibility</th></tr>
+    <tr><td>supabase.ts</td><td>Creates the Supabase client (AsyncStorage persistence, auto-refresh); falls back to a safe dummy client on init failure.</td></tr>
+    <tr><td>config.ts</td><td>Centralized config (Supabase URL / anon key) from Expo <code>extra</code>.</td></tr>
+    <tr><td>auth.ts</td><td>Session model + <code>saveSession / getSession / clearSession</code>.</td></tr>
+    <tr><td>firebase.ts</td><td>Initializes Firebase app (native only).</td></tr>
+    <tr><td>notifications.ts</td><td>Notification listeners, background handler, navigation routing.</td></tr>
+    <tr><td>passwordHash.ts</td><td>Password hashing (noble/hashes + expo-crypto).</td></tr>
+    <tr><td>settingsService.ts</td><td>Read/write user settings (biometrics, notifications, dark mode).</td></tr>
+    <tr><td>validation.ts</td><td>Form validation helpers.</td></tr>
+    <tr><td>dateFormat.ts</td><td>Date/time formatting.</td></tr>
+  </table>
+
+  <!-- ===== 9 BACKEND ===== -->
+  <h2 id="backend"><span class="num">9.</span> Backend — Supabase Edge Functions</h2>
+  <p>110+ Deno/TypeScript serverless functions under <code>supabase/functions/</code>. Each
+  validates the caller, performs DB work via the service role, and returns JSON
+  <code>{ success, data | error }</code>. Grouped by domain below.</p>
+
+  <h3>Authentication &amp; Session</h3>
+  <p>
+    <span class="tag">mobile-login</span><span class="tag">mobile-patient-login</span>
+    <span class="tag">doctor-mobile-login</span><span class="tag">patient-register</span>
+    <span class="tag">mobile-send-otp</span><span class="tag">mobile-verify-otp</span>
+    <span class="tag">mobile-check-email</span><span class="tag">mobile-check-phone</span>
+    <span class="tag">mobile-change-password</span><span class="tag">mobile-change-doctor-password</span><span class="tag">mobile-reset-password</span>
+    <span class="tag">mobile-get-phone-by-medical-id</span><span class="tag">mobile-handle-authorization</span>
+    <span class="tag">mobile-logout-device</span><span class="tag">mobile-switch-company</span>
+    <span class="tag">mobile-validate-session</span>
+  </p>
+
+  <h3>Appointments &amp; Booking</h3>
+  <p>
+    <span class="tag">mobile-book-appointment</span><span class="tag">mobile-get-available-dates</span>
+    <span class="tag">mobile-get-available-slots</span><span class="tag">mobile-get-doctors-for-booking</span>
+    <span class="tag">mobile-get-all-doctors</span><span class="tag">mobile-get-accessible-doctors</span>
+    <span class="tag">mobile-get-patient-appointments</span><span class="tag">mobile-get-patient-doctors</span>
+    <span class="tag">mobile-get-doctor-all-appointments</span><span class="tag">mobile-get-doctor-today-appointments</span>
+    <span class="tag">mobile-handle-appointment-action</span><span class="tag">mobile-update-appointment-status</span>
+    <span class="tag">mobile-update-appointment-notification</span><span class="tag">mobile-get-doctor-clinics</span>
+  </p>
+
+  <h3>Patient Records &amp; Billing</h3>
+  <p>
+    <span class="tag">mobile-get-patient-profile</span><span class="tag">mobile-update-patient-profile</span>
+    <span class="tag">mobile-update-profile</span><span class="tag">mobile-upload-profile-image</span>
+    <span class="tag">mobile-load-user-profile-image</span><span class="tag">mobile-get-patient-prescriptions</span>
+    <span class="tag">mobile-get-patient-invoices</span><span class="tag">mobile-get-invoice-detail</span>
+    <span class="tag">mobile-get-patient-statement</span><span class="tag">mobile-get-patient-packages</span>
+    <span class="tag">mobile-get-package-detail</span><span class="tag">mobile-get-orders</span>
+    <span class="tag">mobile-get-patient-eye-tests</span><span class="tag">mobile-get-patient-eye-summary</span>
+    <span class="tag">mobile-get-dental-encounters</span><span class="tag">mobile-get-nutrition-overview</span>
+    <span class="tag">mobile-scan-card</span>
+  </p>
+
+  <h3>Doctor Dashboard &amp; Records</h3>
+  <p>
+    <span class="tag">mobile-get-doctor-dashboard-stats</span><span class="tag">mobile-get-dashboard-stats</span>
+    <span class="tag">mobile-get-doctor-patients</span><span class="tag">mobile-get-doctor-prescriptions</span>
+    <span class="tag">mobile-get-doctor-orders</span><span class="tag">mobile-get-doctor-dental-encounters</span>
+    <span class="tag">mobile-get-doctor-nutrition-plans</span><span class="tag">mobile-get-doctor-vision-tests</span>
+    <span class="tag">mobile-doctor-manage-vision-test</span><span class="tag">mobile-get-finance-summary</span>
+  </p>
+
+  <h3>Questionnaires &amp; Q&amp;A</h3>
+  <p>
+    <span class="tag">mobile-add-question</span><span class="tag">mobile-update-question</span>
+    <span class="tag">mobile-delete-question</span><span class="tag">mobile-reorder-questions</span>
+    <span class="tag">mobile-create-questionnaire</span><span class="tag">mobile-update-questionnaire</span>
+    <span class="tag">mobile-delete-questionnaire</span><span class="tag">mobile-get-questionnaires</span>
+    <span class="tag">mobile-get-doctor-questionnaires</span><span class="tag">mobile-assign-questionnaire</span>
+    <span class="tag">mobile-unassign-questionnaire</span><span class="tag">mobile-get-questionnaire-patients</span>
+    <span class="tag">mobile-submit-questionnaire</span><span class="tag">mobile-submit-question-response</span>
+    <span class="tag">mobile-get-patient-answers</span><span class="tag">mobile-get-patient-specific-answers</span>
+    <span class="tag">mobile-get-doctor-responses</span>
+  </p>
+
+  <h3>Scheduling (Time Management)</h3>
+  <p>
+    <span class="tag">mobile-upsert-recurring-schedule</span><span class="tag">mobile-delete-recurring-schedule</span>
+    <span class="tag">mobile-create-schedule-block</span><span class="tag">mobile-update-schedule-block</span>
+    <span class="tag">mobile-delete-schedule-block</span><span class="tag">mobile-create-schedule-exception</span>
+    <span class="tag">mobile-update-schedule-exception</span><span class="tag">mobile-delete-schedule-exception</span>
+    <span class="tag">mobile-get-doctor-time-management</span>
+  </p>
+
+  <h3>Notifications &amp; Devices</h3>
+  <p>
+    <span class="tag">mobile-get-notifications</span><span class="tag">mobile-get-doctor-notifications</span>
+    <span class="tag">mobile-mark-notification-read</span><span class="tag">mobile-mark-all-notifications-read</span>
+    <span class="tag">mobile-mark-doctor-notification-read</span><span class="tag">mobile-mark-all-doctor-notifications-read</span>
+    <span class="tag">mobile-complete-notification</span><span class="tag">mobile-insert-notifications-read</span>
+    <span class="tag">mobile-toggle-notifications</span><span class="tag">mobile-toggle-doctor-notifications</span>
+    <span class="tag">mobile-save-device-token</span><span class="tag">mobile-save-doctor-device-token</span>
+    <span class="tag">mobile-get-device-token-status</span><span class="tag">send-push-notification</span>
+    <span class="tag">send-doctor-push-notification</span>
+  </p>
+
+  <h3>Settings &amp; Help</h3>
+  <p>
+    <span class="tag">mobile-get-biometric-settings</span><span class="tag">mobile-update-biometric-settings</span>
+    <span class="tag">mobile-get-primary-settings</span><span class="tag">mobile-get-doctor-settings</span>
+    <span class="tag">mobile-update-doctor-security-settings</span><span class="tag">mobile-update-darkmode</span>
+    <span class="tag">mobile-update-language</span><span class="tag">mobile-change-doctor-password</span>
+    <span class="tag">mobile-get-payment-methods</span><span class="tag">mobile-manage-payment-method</span>
+    <span class="tag">mobile-get-help-content</span>
+  </p>
+  <div class="note"><b>Doctor multi-clinic sync:</b> A doctor with access to multiple
+  companies has one <code>users</code> row per (doctor, company), all sharing the same
+  <code>global_id</code>. Per-account preferences and credentials are kept identical across
+  every clinic by updating all rows with that <code>global_id</code>:
+  <code>mobile-update-darkmode</code> (darkmode), <code>mobile-update-language</code> (language),
+  <code>mobile-toggle-doctor-notifications</code> (allow_notifications),
+  <code>mobile-update-doctor-security-settings</code> (biometric_login / lock_method), and
+  <code>mobile-change-doctor-password</code> (<code>password_hash</code> — verifies the current
+  password with PBKDF2-SHA256, then writes the new hash to every account sharing the
+  <code>global_id</code> and returns <code>updated_accounts</code>). Authentication is via the
+  <code>X-Session-Token</code> header validated against <code>user_sessions</code>.</div>
+  <div class="note"><b>Forced re-login after a password change:</b> after updating the hash,
+  <code>mobile-change-doctor-password</code> deletes every <code>user_sessions</code> row for all
+  accounts sharing the <code>global_id</code> <em>except</em> the calling device's token, and
+  returns <code>revoked_sessions</code>. The doctor tab layout
+  (<code>app/(doctor-tabs)/_layout.tsx</code>) calls <code>mobile-validate-session</code> on mount
+  and on every app foreground; when it returns <code>{valid:false}</code> (token revoked or
+  expired) the app signs the doctor out and routes to login. The validator fails open on
+  network/server errors so a user is never logged out incorrectly.</div>
+
+  <!-- ===== 10 DATABASE ===== -->
+  <h2 id="database"><span class="num">10.</span> Database Schema</h2>
+  <p>PostgreSQL on Supabase with <b>Row-Level Security (RLS)</b> on every app table. The app
+  creates the tables below; it also references existing clinic-system tables
+  (<code>patients</code>, <code>user_patients</code>, <code>doctors</code>, <code>clinics</code>,
+  <code>companies</code>, <code>appointments</code>, <code>users</code>).</p>
+
+  <h3>user_patient_sessions</h3>
+  <p>Custom auth sessions for mobile patients (token validated by edge functions).</p>
+  <table>
+    <tr><th>Column</th><th>Type</th><th>Notes</th></tr>
+    <tr><td>id</td><td>uuid PK</td><td>gen_random_uuid()</td></tr>
+    <tr><td>patient_id</td><td>uuid FK → user_patients</td><td>ON DELETE CASCADE</td></tr>
+    <tr><td>token</td><td>text UNIQUE</td><td>session token</td></tr>
+    <tr><td>expires_at</td><td>timestamptz</td><td>expiry</td></tr>
+    <tr><td>created_at / updated_at</td><td>timestamptz</td><td>defaults now()</td></tr>
+  </table>
+
+  <h3>otp_verifications</h3>
+  <table>
+    <tr><th>Column</th><th>Type</th><th>Notes</th></tr>
+    <tr><td>id</td><td>uuid PK</td><td></td></tr>
+    <tr><td>phone / email</td><td>text</td><td>recipient</td></tr>
+    <tr><td>otp_code</td><td>text</td><td>code</td></tr>
+    <tr><td>is_verified</td><td>boolean</td><td>default false</td></tr>
+    <tr><td>expires_at</td><td>timestamptz</td><td>+ registration fields added later</td></tr>
+  </table>
+
+  <h3>device_tokens</h3>
+  <p>FCM push tokens per device (patient &amp; doctor; <code>patient_id</code>/<code>user_id</code> nullable).</p>
+  <table>
+    <tr><th>Column</th><th>Type</th><th>Notes</th></tr>
+    <tr><td>id</td><td>uuid PK</td><td></td></tr>
+    <tr><td>patient_id / user_id</td><td>uuid</td><td>owner (nullable)</td></tr>
+    <tr><td>medical_id</td><td>text</td><td>quick lookup</td></tr>
+    <tr><td>fcm_token</td><td>text</td><td>unique device token</td></tr>
+    <tr><td>platform</td><td>text</td><td>ios / android (+web later)</td></tr>
+    <tr><td>device_model / app_version</td><td>text</td><td>metadata</td></tr>
+    <tr><td>is_active</td><td>boolean</td><td>default true</td></tr>
+  </table>
+
+  <h3>doctor_schedules · schedule_exceptions · schedule_blocks</h3>
+  <table>
+    <tr><th>Table</th><th>Key columns</th></tr>
+    <tr><td>doctor_schedules</td><td>doctor_id, clinic_id, day_of_week (0–6), start_time, end_time, slot_duration, is_active · UNIQUE(doctor,clinic,day)</td></tr>
+    <tr><td>schedule_exceptions</td><td>doctor_id, clinic_id, exception_date, is_available, start_time, end_time, reason · UNIQUE(doctor,clinic,date)</td></tr>
+    <tr><td>schedule_blocks</td><td>doctor_id, clinic_id, blocked time range (lunch, meetings) — recurring or one-time</td></tr>
+  </table>
+
+  <h3>patient_questions</h3>
+  <table>
+    <tr><th>Column</th><th>Type</th><th>Notes</th></tr>
+    <tr><td>id</td><td>uuid PK</td><td></td></tr>
+    <tr><td>patient_id / doctor_id / company_id</td><td>uuid FK</td><td>relations</td></tr>
+    <tr><td>question</td><td>text</td><td>patient question</td></tr>
+    <tr><td>response</td><td>text</td><td>doctor answer (nullable)</td></tr>
+    <tr><td>status</td><td>text</td><td>pending / answered</td></tr>
+    <tr><td>created_at / answered_at</td><td>timestamptz</td><td></td></tr>
+  </table>
+
+  <h3>patient_notifications</h3>
+  <table>
+    <tr><th>Column</th><th>Type</th><th>Notes</th></tr>
+    <tr><td>id</td><td>uuid PK</td><td></td></tr>
+    <tr><td>company_id / patient_id / objective_id</td><td>uuid</td><td>relations</td></tr>
+    <tr><td>medical_id</td><td>text</td><td>lookup</td></tr>
+    <tr><td>category</td><td>text</td><td>appointment / order / prescription …</td></tr>
+    <tr><td>message_header / message_body</td><td>text</td><td>content</td></tr>
+    <tr><td>read</td><td>boolean</td><td>default false</td></tr>
+    <tr><td>usertype / auth_status</td><td>text</td><td>added later</td></tr>
+  </table>
+
+  <h3>doctor_notifications</h3>
+  <table>
+    <tr><th>Column</th><th>Type</th><th>Notes</th></tr>
+    <tr><td>id</td><td>uuid PK</td><td></td></tr>
+    <tr><td>company_id / doctor_id / patient_id / objective_id</td><td>integer</td><td>relations (FK to companies/doctors)</td></tr>
+    <tr><td>category / message</td><td>text</td><td>content</td></tr>
+    <tr><td>read</td><td>boolean</td><td>default false</td></tr>
+    <tr><td>status</td><td>text</td><td>pending / completed</td></tr>
+    <tr><td>completed</td><td>text</td><td>yes / no / denied (authorization)</td></tr>
+    <tr><td>auth_status</td><td>text</td><td>authorization workflow</td></tr>
+  </table>
+
+  <h3>notification_reads</h3>
+  <p>Tracks per-user read state for appointment notifications.
+  Columns: <code>user_id</code>, <code>appointment_id</code>, <code>notification_type</code>
+  (booked/confirmed/cancelled), <code>read_at</code> (null = unread). UNIQUE(user, appointment, type).</p>
+
+  <h3>patient_payment_methods</h3>
+  <table>
+    <tr><th>Column</th><th>Type</th><th>Notes</th></tr>
+    <tr><td>id</td><td>uuid PK</td><td></td></tr>
+    <tr><td>patient_id</td><td>uuid FK → user_patients</td><td></td></tr>
+    <tr><td>brand</td><td>text</td><td>Visa / Mastercard / Amex / Other</td></tr>
+    <tr><td>last4</td><td>text</td><td>masked card</td></tr>
+    <tr><td>holder_name / expiry</td><td>text</td><td>MM/YY</td></tr>
+    <tr><td>is_default</td><td>boolean</td><td></td></tr>
+  </table>
+
+  <div class="note"><b>Profile flags added to existing tables:</b> <code>user_patients</code> and
+  <code>users</code> gained <code>darkmode</code>, <code>allow_notifications</code>, and biometric
+  auth fields; <code>doctors</code> gained <code>allow_whatsapp_chat</code>. A
+  <code>patient-profiles</code> Storage bucket holds profile images.</div>
+
+  <!-- ===== 11 DB FUNCTIONS ===== -->
+  <h2 id="dbfunctions"><span class="num">11.</span> DB Functions &amp; Triggers</h2>
+
+  <h3>RPC functions (dashboard &amp; data)</h3>
+  <p>Role-aware aggregates power the doctor dashboard (admin / doctor / staff variants):</p>
+  <p>
+    <span class="tag">get_doctor_today_schedule</span><span class="tag">get_doctor_pending_today</span>
+    <span class="tag">get_doctor_completed_today</span><span class="tag">get_doctor_cancelled_count</span>
+    <span class="tag">get_doctor_scheduled_count</span><span class="tag">get_doctor_total_patients</span>
+    <span class="tag">get_doctor_patients</span><span class="tag">get_doctor_notifications_via_access</span>
+    <span class="tag">get_admin_* / get_staff_*</span><span class="tag">upsert_device_token</span>
+  </p>
+
+  <h3>Notification triggers</h3>
+  <p>Postgres triggers create notification rows automatically on clinical events, then a
+  generic FCM trigger delivers them:</p>
+  <table>
+    <tr><th>Trigger function</th><th>Fires on</th></tr>
+    <tr><td>notify_patient_new_appointment / notify_appointment_created / notify_appointment_update</td><td>appointment changes</td></tr>
+    <tr><td>notify_new_order / notify_patient_new_order</td><td>new order</td></tr>
+    <tr><td>notify_prescription_created</td><td>new prescription</td></tr>
+    <tr><td>notify_invoice_created</td><td>new invoice</td></tr>
+    <tr><td>notify_dental_encounter_created</td><td>dental encounter</td></tr>
+    <tr><td>notify_eye_test_created / notify_eyeglass_prescription_created</td><td>vision records</td></tr>
+    <tr><td>notify_nutrition_plan_assigned</td><td>nutrition plan</td></tr>
+    <tr><td>notify_questionnaire_assignment</td><td>questionnaire assigned</td></tr>
+    <tr><td>notify_doctor_response</td><td>doctor answers a question</td></tr>
+    <tr><td>auto_send_fcm_notification · send_fcm_on_patient_notification · send_fcm_on_doctor_notification</td><td>AFTER INSERT on notifications → pg_net → edge function</td></tr>
+  </table>
+  <div class="note">The <code>pg_net</code> extension lets Postgres make outbound HTTP calls so a
+  database insert can directly invoke <code>send-push-notification</code> — no external cron needed.</div>
+
+  <!-- ===== 12 NOTIFICATIONS ===== -->
+  <h2 id="notifications"><span class="num">12.</span> Push Notifications</h2>
+  <ol>
+    <li><b>Registration:</b> on login the app gets an FCM token (Firebase) and stores it via
+      <code>mobile-save-device-token</code> / <code>mobile-save-doctor-device-token</code> into
+      <code>device_tokens</code> (secured locally with expo-secure-store).</li>
+    <li><b>Generation:</b> a clinical event inserts a row in <code>patient_notifications</code> /
+      <code>doctor_notifications</code> (via triggers).</li>
+    <li><b>Delivery:</b> an AFTER-INSERT FCM trigger uses <code>pg_net</code> to call the
+      <code>send-push-notification</code> edge function, which looks up active device tokens and
+      pushes through FCM.</li>
+    <li><b>Handling:</b> <code>utils/notifications.ts</code> wires foreground listeners + a
+      background handler and routes the user to the right screen (deep-link navigation by category).</li>
+    <li><b>Sign-out:</b> the current device token is deactivated (<code>mobile-logout-device</code>).</li>
+  </ol>
+
+  <!-- ===== 13 SECURITY ===== -->
+  <h2 id="security"><span class="num">13.</span> Security</h2>
+  <ul>
+    <li><b>Row-Level Security</b> on every app table — patients/doctors only access their own rows;
+      a service-role policy lets edge functions operate.</li>
+    <li><b>Custom session tokens</b> (<code>user_patient_sessions</code>) sent via
+      <code>X-Session-Token</code>; the anon key never grants direct table access.</li>
+    <li><b>Password hashing</b> with @noble/hashes + expo-crypto (<code>utils/passwordHash.ts</code>).</li>
+    <li><b>OTP verification</b> for registration &amp; password reset (phone/email).</li>
+    <li><b>Biometric gate</b> (Face ID / fingerprint) optionally protects app entry.</li>
+    <li><b>Image CAPTCHA</b> on registration to block bots.</li>
+    <li><b>Single / multi-device login</b> control + token deactivation on logout.</li>
+    <li><b>Secrets</b> stored with expo-secure-store; service account keys kept server-side.</li>
+  </ul>
+  <div class="warn"><b>Note:</b> <code>app.json</code> ships the Supabase URL + <i>anon</i> key
+  (safe to expose by design — protected by RLS). Service-role keys and the Firebase service
+  account must remain server-side only and never be committed to a public repo.</div>
+
+  <!-- ===== 14 BUILD ===== -->
+  <h2 id="build"><span class="num">14.</span> Build &amp; Deployment</h2>
+  <h4>NPM scripts</h4>
+  <table>
+    <tr><th>Script</th><th>Action</th></tr>
+    <tr><td>npm run dev</td><td>Start Expo dev server</td></tr>
+    <tr><td>npm run android / ios</td><td>Native run on device/emulator</td></tr>
+    <tr><td>npm run build:web</td><td>Export web bundle</td></tr>
+    <tr><td>npm run typecheck</td><td><code>tsc --noEmit</code></td></tr>
+    <tr><td>npm run lint</td><td>Expo lint</td></tr>
+    <tr><td>qa:frontend / backend / database / mobile</td><td>QA agent review scripts</td></tr>
+  </table>
+  <h4>Targets &amp; config</h4>
+  <ul>
+    <li><b>App identity:</b> <code>com.maw3edak.app</code> (iOS &amp; Android), scheme <code>maw3edak</code>.</li>
+    <li><b>EAS Build</b> (<code>eas.json</code>) for native binaries; <b>expo-updates</b> for OTA updates.</li>
+    <li><b>Firebase</b> configured via <code>google-services.json</code> (Android) and
+      <code>googleservice-info.plist</code> (iOS).</li>
+    <li><b>New Architecture</b> enabled; typed routes on; portrait orientation.</li>
+    <li><b>Permissions:</b> Camera, Storage, Microphone, remote-notification background mode.</li>
+  </ul>
+
+  <!-- ===== 15 CODE ===== -->
+  <h2 id="code"><span class="num">15.</span> Key Code Samples</h2>
+
+  <h3>Design tokens — <code>constants/theme.ts</code></h3>
+<pre>export const colors = {
+  primary: '#006BFF', primaryLight: '#EFF6FF', primaryDark: '#1E40AF',
+  success: '#10B981', warning: '#F59E0B', error: '#EF4444', purple: '#8B5CF6',
+  background: '#FFFFFF', backgroundSecondary: '#F8FAFC',
+  text: { primary: '#1E293B', secondary: '#64748B', tertiary: '#94A3B8' },
+};
+export const spacing      = { xs:4, sm:8, md:12, lg:16, xl:20, xxl:24, xxxl:32 };
+export const borderRadius = { sm:8, md:12, lg:16, xl:20, xxl:24, full:9999 };
+export const typography = {
+  h1: { fontSize:28, fontFamily:'Inter-Bold',     lineHeight:36 },
+  body:{ fontSize:15, fontFamily:'Inter-Regular',  lineHeight:22 },
+};</pre>
+
+  <h3>Supabase client — <code>utils/supabase.ts</code></h3>
+<pre>import { createClient } from '@supabase/supabase-js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { config } from './config';
+
+export const supabase = createClient(
+  config.supabaseUrl,
+  config.supabaseAnonKey,
+  { auth: {
+      storage: AsyncStorage,
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: false,
+  }}
+);</pre>
+
+  <h3>Authenticated edge-function call — switch clinic (AuthContext)</h3>
+<pre>const response = await fetch(
+  `${config.supabaseUrl}/functions/v1/mobile-switch-company`,
+  { method: 'POST',
+    headers: {
+      Authorization: `Bearer ${config.supabaseAnonKey}`,
+      'X-Session-Token': session.access_token,   // custom session token
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ companyId: clinicId }),
+  });
+const result = await response.json();   // { success, settings, ... }</pre>
+
+  <h3>Root provider tree — <code>app/_layout.tsx</code></h3>
+<pre>&lt;ErrorBoundary&gt;
+  &lt;SafeAreaProvider&gt;
+    &lt;AuthProvider&gt;
+      &lt;ThemeProvider&gt;
+        &lt;BiometricAuthGate&gt;
+          &lt;Stack screenOptions={{ headerShown: false }}&gt;
+            &lt;Stack.Screen name="index"  /&gt;
+            &lt;Stack.Screen name="login"  /&gt;
+            &lt;Stack.Screen name="(tabs)" /&gt;          {/* patient */}
+            &lt;Stack.Screen name="(doctor-tabs)" /&gt;   {/* doctor  */}
+          &lt;/Stack&gt;
+        &lt;/BiometricAuthGate&gt;
+      &lt;/ThemeProvider&gt;
+    &lt;/AuthProvider&gt;
+  &lt;/SafeAreaProvider&gt;
+&lt;/ErrorBoundary&gt;</pre>
+
+  <h3>Patient tab bar — <code>app/(tabs)/_layout.tsx</code></h3>
+<pre>&lt;Tabs screenOptions={{ tabBarActiveTintColor: colors.primary }}&gt;
+  &lt;Tabs.Screen name="index"         options={{ title:'Home',    icon:Home }} /&gt;
+  &lt;Tabs.Screen name="appointments"  options={{ title:'Appts',   icon:Calendar }} /&gt;
+  &lt;Tabs.Screen name="visit-history" options={{ title:'Visits',  icon:History }} /&gt;
+  {/* profile, orders, invoices, ... → href:null (hidden from tab bar) */}
+&lt;/Tabs&gt;</pre>
+
+  <h3>Auto-deliver FCM on new notification (DB trigger pattern)</h3>
+<pre>CREATE OR REPLACE FUNCTION send_fcm_on_patient_notification()
+RETURNS TRIGGER AS $$
+BEGIN
+  PERFORM net.http_post(
+    url     := 'https://&lt;project&gt;.supabase.co/functions/v1/send-push-notification',
+    headers := '{"Content-Type":"application/json"}'::jsonb,
+    body    := json_build_object(
+        'patient_id', NEW.patient_id,
+        'title',      NEW.message_header,
+        'body',       NEW.message_body,
+        'category',   NEW.category)::jsonb
+  );
+  RETURN NEW;
+END; $$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_fcm_patient_notification
+  AFTER INSERT ON patient_notifications
+  FOR EACH ROW EXECUTE FUNCTION send_fcm_on_patient_notification();</pre>
+
+  <div class="footer">
+    Maw3edak Mobile — Full Technical Documentation · Generated 14 June 2026 ·
+    React Native (Expo SDK 54) · Supabase · Firebase Cloud Messaging<br/>
+    To export: open this file in a browser and choose <b>Print → Save as PDF</b>
+    (or the 🖨️ button). Set margins to “Default” and enable “Background graphics”.
+  </div>
+
+</div>
+<script>
+  // Smooth-scroll TOC + keyboard print shortcut
+  document.querySelectorAll('.toc a').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var el = document.querySelector(this.getAttribute('href'));
+      if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+    });
+  });
+  document.addEventListener('keydown', function(e){
+    if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='p'){ /* native print */ }
+  });
+</script>
+</body>
+</html>

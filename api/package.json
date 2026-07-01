@@ -1,0 +1,15 @@
+{
+  "name": "maw3edak-fcm-server",
+  "version": "1.0.0",
+  "description": "FCM Push Notification Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "firebase-admin": "^12.0.0"
+  }
+}

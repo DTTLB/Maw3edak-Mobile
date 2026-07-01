@@ -1,0 +1,47 @@
+{
+  "en": {
+    "title": "My Packages",
+    "filterByCompany": "Filter by Company",
+    "allCompanies": "All Companies",
+    "loginToView": "Please login to view packages",
+    "failedToLoad": "Failed to load packages",
+    "failedToLoadPurchased": "Failed to load purchased packages",
+    "noPackagesFrom": "No packages from {{company}}",
+    "noPackagesYet": "No packages purchased yet",
+    "statusPaid": "Paid",
+    "statusPending": "Pending",
+    "purchased": "Purchased: {{date}}",
+    "servicesLabel": "Services:",
+    "sessionsUsed": "{{used}}/{{total}} sessions used"
+  },
+  "ar": {
+    "title": "باقاتي",
+    "filterByCompany": "تصفية حسب الشركة",
+    "allCompanies": "جميع الشركات",
+    "loginToView": "يرجى تسجيل الدخول لعرض الباقات",
+    "failedToLoad": "فشل تحميل الباقات",
+    "failedToLoadPurchased": "فشل تحميل الباقات المشتراة",
+    "noPackagesFrom": "لا توجد باقات من {{company}}",
+    "noPackagesYet": "لم يتم شراء أي باقات بعد",
+    "statusPaid": "مدفوع",
+    "statusPending": "قيد الانتظار",
+    "purchased": "تاريخ الشراء: {{date}}",
+    "servicesLabel": "الخدمات:",
+    "sessionsUsed": "{{used}}/{{total}} جلسات مستخدمة"
+  },
+  "fr": {
+    "title": "Mes forfaits",
+    "filterByCompany": "Filtrer par entreprise",
+    "allCompanies": "Toutes les entreprises",
+    "loginToView": "Veuillez vous connecter pour voir les forfaits",
+    "failedToLoad": "Échec du chargement des forfaits",
+    "failedToLoadPurchased": "Échec du chargement des forfaits achetés",
+    "noPackagesFrom": "Aucun forfait de {{company}}",
+    "noPackagesYet": "Aucun forfait acheté pour le moment",
+    "statusPaid": "Payé",
+    "statusPending": "En attente",
+    "purchased": "Acheté le : {{date}}",
+    "servicesLabel": "Services :",
+    "sessionsUsed": "{{used}}/{{total}} séances utilisées"
+  }
+}

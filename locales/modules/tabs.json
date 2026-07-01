@@ -1,0 +1,26 @@
+{
+  "en": {
+    "home": "Home",
+    "appointments": "Appointments",
+    "ai": "AI",
+    "visits": "Visits",
+    "scan": "Scan",
+    "settings": "Settings"
+  },
+  "ar": {
+    "home": "الرئيسية",
+    "appointments": "المواعيد",
+    "ai": "الذكاء الاصطناعي",
+    "visits": "الزيارات",
+    "scan": "مسح",
+    "settings": "الإعدادات"
+  },
+  "fr": {
+    "home": "Accueil",
+    "appointments": "Rendez-vous",
+    "ai": "IA",
+    "visits": "Visites",
+    "scan": "Scanner",
+    "settings": "Paramètres"
+  }
+}

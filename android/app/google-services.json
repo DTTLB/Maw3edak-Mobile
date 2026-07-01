@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "409408036144",
+    "project_id": "maw3edak-5d473",
+    "storage_bucket": "maw3edak-5d473.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409408036144:android:930e25dd3f448f7d6efcf5",
+        "android_client_info": {
+          "package_name": "com.maw3edak.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZocSmrzdVFL0yGmlnpq4fFqSMOqaW6ew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

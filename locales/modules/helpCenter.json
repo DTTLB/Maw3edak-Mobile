@@ -1,0 +1,32 @@
+{
+  "en": {
+    "title": "Support",
+    "loading": "Loading help content...",
+    "emptyTitle": "No Help Content Available",
+    "emptyText": "Help content is not available at this time",
+    "failedToLoad": "Failed to load help content",
+    "quickActions": "Quick Actions",
+    "contactSupport": "Contact Support",
+    "termsConditions": "Terms & Conditions"
+  },
+  "ar": {
+    "title": "الدعم",
+    "loading": "جارٍ تحميل محتوى المساعدة...",
+    "emptyTitle": "لا يوجد محتوى مساعدة متاح",
+    "emptyText": "محتوى المساعدة غير متاح في الوقت الحالي",
+    "failedToLoad": "فشل تحميل محتوى المساعدة",
+    "quickActions": "إجراءات سريعة",
+    "contactSupport": "تواصل مع الدعم",
+    "termsConditions": "الشروط والأحكام"
+  },
+  "fr": {
+    "title": "Assistance",
+    "loading": "Chargement du contenu d'aide...",
+    "emptyTitle": "Aucun contenu d'aide disponible",
+    "emptyText": "Le contenu d'aide n'est pas disponible pour le moment",
+    "failedToLoad": "Échec du chargement du contenu d'aide",
+    "quickActions": "Actions rapides",
+    "contactSupport": "Contacter le support",
+    "termsConditions": "Conditions générales"
+  }
+}

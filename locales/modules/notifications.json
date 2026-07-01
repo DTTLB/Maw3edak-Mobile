@@ -1,0 +1,32 @@
+{
+  "en": {
+    "title": "Notifications",
+    "emptyTitle": "No notifications",
+    "emptyDescription": "You have no notifications yet",
+    "timeJustNow": "Just now",
+    "timeMinutesAgo": "{{count}}m ago",
+    "timeHoursAgo": "{{count}}h ago",
+    "timeYesterday": "Yesterday",
+    "timeDaysAgo": "{{count}}d ago"
+  },
+  "ar": {
+    "title": "الإشعارات",
+    "emptyTitle": "لا توجد إشعارات",
+    "emptyDescription": "ليس لديك أي إشعارات بعد",
+    "timeJustNow": "الآن",
+    "timeMinutesAgo": "قبل {{count}} دقيقة",
+    "timeHoursAgo": "قبل {{count}} ساعة",
+    "timeYesterday": "أمس",
+    "timeDaysAgo": "قبل {{count}} يوم"
+  },
+  "fr": {
+    "title": "Notifications",
+    "emptyTitle": "Aucune notification",
+    "emptyDescription": "Vous n'avez pas encore de notifications",
+    "timeJustNow": "À l'instant",
+    "timeMinutesAgo": "il y a {{count}} min",
+    "timeHoursAgo": "il y a {{count}} h",
+    "timeYesterday": "Hier",
+    "timeDaysAgo": "il y a {{count}} j"
+  }
+}
