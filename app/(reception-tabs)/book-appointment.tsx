@@ -118,6 +118,7 @@ export default function ReceptionBookAppointmentScreen() {
   const [service, setService] = useState<ReceptionService | null>(null);
   const [room, setRoom] = useState<ReceptionRoom | null>(null);
   const [openPicker, setOpenPicker] = useState<'service' | 'room' | null>(null);
+  const [pickerSearch, setPickerSearch] = useState('');
 
   // Slots
   const [slots, setSlots] = useState<ReceptionSlot[]>([]);
@@ -562,6 +563,27 @@ export default function ReceptionBookAppointmentScreen() {
   const detailsReady =
     (services.length === 0 || !!service) && (rooms.length === 0 || !!room);
 
+  // Filter the open picker's list by the search box (case-insensitive).
+  const filteredServices = useMemo(() => {
+    const q = pickerSearch.trim().toLowerCase();
+    if (!q) return services;
+    return services.filter((s) => s.name.toLowerCase().includes(q));
+  }, [services, pickerSearch]);
+  const filteredRooms = useMemo(() => {
+    const q = pickerSearch.trim().toLowerCase();
+    if (!q) return rooms;
+    return rooms.filter((r) => roomLabel(r).toLowerCase().includes(q) || (r.room_type || '').toLowerCase().includes(q));
+  }, [rooms, pickerSearch]);
+
+  const openPickerFor = (which: 'service' | 'room') => {
+    setPickerSearch('');
+    setOpenPicker(which);
+  };
+  const closePicker = () => {
+    setPickerSearch('');
+    setOpenPicker(null);
+  };
+
   const renderDetailsStep = () => (
     <ScrollView style={styles.stepScroll} contentContainerStyle={styles.stepContent} showsVerticalScrollIndicator={false}>
       <Text style={[styles.stepTitle, { color: colors.text }]}>{t('reception.detailsTitle')}</Text>
@@ -579,7 +601,7 @@ export default function ReceptionBookAppointmentScreen() {
             ) : (
               <TouchableOpacity
                 style={[styles.selectBtn, { backgroundColor: colors.card, borderColor: service ? colors.primary : colors.border }]}
-                onPress={() => setOpenPicker('service')}
+                onPress={() => openPickerFor('service')}
                 activeOpacity={0.8}
               >
                 <Stethoscope size={18} color={colors.primary} strokeWidth={2} />
@@ -606,7 +628,7 @@ export default function ReceptionBookAppointmentScreen() {
             ) : (
               <TouchableOpacity
                 style={[styles.selectBtn, { backgroundColor: colors.card, borderColor: room ? colors.primary : colors.border }]}
-                onPress={() => setOpenPicker('room')}
+                onPress={() => openPickerFor('room')}
                 activeOpacity={0.8}
               >
                 <DoorOpen size={18} color={colors.primary} strokeWidth={2} />
@@ -774,24 +796,43 @@ export default function ReceptionBookAppointmentScreen() {
       {renderStep()}
 
       {/* Service / Room option picker (centered) */}
-      <Modal visible={!!openPicker} transparent animationType="fade" onRequestClose={() => setOpenPicker(null)}>
-        <TouchableOpacity style={styles.pickerScrim} activeOpacity={1} onPress={() => setOpenPicker(null)}>
+      <Modal visible={!!openPicker} transparent animationType="fade" onRequestClose={closePicker}>
+        <TouchableOpacity style={styles.pickerScrim} activeOpacity={1} onPress={closePicker}>
           <TouchableOpacity activeOpacity={1} style={[styles.pickerCard, { backgroundColor: colors.card }]}>
             <View style={[styles.pickerHead, { borderBottomColor: colors.border }]}>
               <Text style={[styles.pickerTitle, { color: colors.text }]}>
                 {openPicker === 'service' ? t('reception.selectService') : t('reception.selectRoom')}
               </Text>
-              <TouchableOpacity onPress={() => setOpenPicker(null)} hitSlop={10}>
+              <TouchableOpacity onPress={closePicker} hitSlop={10}>
                 <X size={20} color={colors.textSecondary} />
               </TouchableOpacity>
             </View>
-            <ScrollView style={styles.pickerList} showsVerticalScrollIndicator={false}>
+            <View style={[styles.pickerSearch, { backgroundColor: colors.background, borderColor: colors.border }]}>
+              <Search size={16} color={colors.textSecondary} strokeWidth={2} />
+              <TextInput
+                style={[styles.searchInput, { color: colors.text }]}
+                placeholder={openPicker === 'service' ? t('reception.searchServices') : t('reception.searchRooms')}
+                placeholderTextColor={colors.textTertiary}
+                value={pickerSearch}
+                onChangeText={setPickerSearch}
+                autoCorrect={false}
+                autoFocus
+              />
+              {pickerSearch ? (
+                <TouchableOpacity onPress={() => setPickerSearch('')} hitSlop={8}>
+                  <X size={16} color={colors.textSecondary} />
+                </TouchableOpacity>
+              ) : null}
+            </View>
+            <ScrollView style={styles.pickerList} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
               {openPicker === 'service'
-                ? services.map((s) => (
+                ? (filteredServices.length === 0
+                    ? <Text style={[styles.pickerEmpty, { color: colors.textTertiary }]}>{t('reception.noResults')}</Text>
+                    : filteredServices.map((s) => (
                     <TouchableOpacity
                       key={s.id}
                       style={styles.pickerRow}
-                      onPress={() => { setService(s); setOpenPicker(null); }}
+                      onPress={() => { setService(s); closePicker(); }}
                       activeOpacity={0.7}
                     >
                       <View style={{ flex: 1 }}>
@@ -804,12 +845,14 @@ export default function ReceptionBookAppointmentScreen() {
                       </View>
                       {service?.id === s.id ? <Check size={18} color={colors.primary} strokeWidth={2.5} /> : null}
                     </TouchableOpacity>
-                  ))
-                : rooms.map((r) => (
+                  )))
+                : (filteredRooms.length === 0
+                    ? <Text style={[styles.pickerEmpty, { color: colors.textTertiary }]}>{t('reception.noResults')}</Text>
+                    : filteredRooms.map((r) => (
                     <TouchableOpacity
                       key={r.id}
                       style={styles.pickerRow}
-                      onPress={() => { setRoom(r); setOpenPicker(null); }}
+                      onPress={() => { setRoom(r); closePicker(); }}
                       activeOpacity={0.7}
                     >
                       <View style={{ flex: 1 }}>
@@ -818,7 +861,7 @@ export default function ReceptionBookAppointmentScreen() {
                       </View>
                       {room?.id === r.id ? <Check size={18} color={colors.primary} strokeWidth={2.5} /> : null}
                     </TouchableOpacity>
-                  ))}
+                  )))}
             </ScrollView>
           </TouchableOpacity>
         </TouchableOpacity>
@@ -957,7 +1000,9 @@ const makeStyles = (colors: any) =>
     pickerCard: { width: '100%', maxWidth: 420, borderRadius: 22, paddingHorizontal: 20, paddingTop: 6, paddingBottom: 16, maxHeight: '70%' },
     pickerHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 16, borderBottomWidth: 1 },
     pickerTitle: { fontSize: 17, fontWeight: '800' },
+    pickerSearch: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 12, height: 42, borderRadius: 12, borderWidth: 1, marginTop: 12 },
     pickerList: { paddingTop: 4 },
+    pickerEmpty: { fontSize: 14, textAlign: 'center', paddingVertical: 28 },
     pickerRow: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 14 },
     pickerRowText: { fontSize: 15, fontWeight: '600' },
     pickerRowSub: { fontSize: 12.5, marginTop: 2 },
