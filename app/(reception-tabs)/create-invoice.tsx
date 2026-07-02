@@ -624,6 +624,7 @@ export default function ReceptionCreateInvoiceScreen() {
               style={[styles.moneyInput, { backgroundColor: colors.card, color: colors.text, borderColor: colors.border }]}
               value={taxText}
               onChangeText={(v) => setTaxText(v.replace(/[^0-9.]/g, ''))}
+              onBlur={() => setTaxText((v) => (v.trim() === '' ? '0' : v))}
               keyboardType="decimal-pad"
             />
           </View>
@@ -633,6 +634,7 @@ export default function ReceptionCreateInvoiceScreen() {
               style={[styles.moneyInput, { backgroundColor: colors.card, color: colors.text, borderColor: colors.border }]}
               value={discountText}
               onChangeText={(v) => setDiscountText(v.replace(/[^0-9.]/g, ''))}
+              onBlur={() => setDiscountText((v) => (v.trim() === '' ? '0' : v))}
               keyboardType="decimal-pad"
             />
           </View>
