@@ -415,6 +415,18 @@ export default function ReceptionBookAppointmentScreen() {
     );
   }, [patients, patientSearch]);
 
+  // Filter the open picker's list by the search box (case-insensitive).
+  const filteredServices = useMemo(() => {
+    const q = pickerSearch.trim().toLowerCase();
+    if (!q) return services;
+    return services.filter((s) => s.name.toLowerCase().includes(q));
+  }, [services, pickerSearch]);
+  const filteredRooms = useMemo(() => {
+    const q = pickerSearch.trim().toLowerCase();
+    if (!q) return rooms;
+    return rooms.filter((r) => roomLabel(r).toLowerCase().includes(q) || (r.room_type || '').toLowerCase().includes(q));
+  }, [rooms, pickerSearch]);
+
   const styles = useMemo(() => makeStyles(colors), [colors]);
 
   // ---- Success screen ------------------------------------------------------
@@ -562,18 +574,6 @@ export default function ReceptionBookAppointmentScreen() {
   // a selection — mirrors the web form requiring a service and a room when present.
   const detailsReady =
     (services.length === 0 || !!service) && (rooms.length === 0 || !!room);
-
-  // Filter the open picker's list by the search box (case-insensitive).
-  const filteredServices = useMemo(() => {
-    const q = pickerSearch.trim().toLowerCase();
-    if (!q) return services;
-    return services.filter((s) => s.name.toLowerCase().includes(q));
-  }, [services, pickerSearch]);
-  const filteredRooms = useMemo(() => {
-    const q = pickerSearch.trim().toLowerCase();
-    if (!q) return rooms;
-    return rooms.filter((r) => roomLabel(r).toLowerCase().includes(q) || (r.room_type || '').toLowerCase().includes(q));
-  }, [rooms, pickerSearch]);
 
   const openPickerFor = (which: 'service' | 'room') => {
     setPickerSearch('');
